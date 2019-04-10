@@ -1,0 +1,16 @@
+[Unit]
+Description=Monitor proxy
+Documentation=http://www.test.fr
+After=network.target network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/proxy
+ExecStart=/opt/proxy/proxy.js
+User=root
+Group=monitor
+PIDFile=/run/monitor/monitor.proxy.pid
+
+[Install]
+WantedBy=multi-user.target
+Alias=proxy.service

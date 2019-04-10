@@ -1,0 +1,21 @@
+[Unit]
+Description=Monitor tcp
+Documentation=http://www.test.fr
+After=network.target network-online.target
+Requires=redis-server.service
+Wants=monitor.networks.service
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/probe.tcp
+ExecStart=/opt/probe.tcp/probe.tcp.js
+User=monitor
+Group=monitor
+PIDFile=/run/monitor/monitor.probe.tcp.pid
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=monitor.probe.tcp
+
+[Install]
+WantedBy=multi-user.target
+Alias=monitor.probe.tcp.service

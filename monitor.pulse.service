@@ -1,0 +1,19 @@
+[Unit]
+Description=Monitor pulse
+Documentation=http://www.test.fr
+After=network.target network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/pulse
+ExecStart=/opt/pulse/pulse.js
+User=monitor
+Group=monitor
+PIDFile=/run/monitor/monitor.pulse.pid
+StandardOutput=syslog
+StandardError=journal
+SyslogIdentifier=monitor_pulse_service
+
+[Install]
+WantedBy=multi-user.target
+Alias=pulse.service

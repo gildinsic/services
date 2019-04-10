@@ -1,0 +1,16 @@
+[Unit]
+Description=Monitor pingdom webhook
+Documentation=http://www.test.fr
+After=network.target network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/webhook
+ExecStart=/opt/webhook/webhook.js
+User=monitor
+Group=monitor
+PIDFile=/run/monitor/monitor.webhook.pid
+
+[Install]
+WantedBy=multi-user.target
+Alias=webhook.service

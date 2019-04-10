@@ -1,0 +1,22 @@
+[Unit]
+Description=Monitor pingwee server
+Documentation=http://www.test.fr
+After=network.target network-online.target
+Requires=redis-server.service
+Requires=monitor.networks.service
+Wants=monitor.probe.ping.service
+Wants=monitor.probe.tcp.service
+Wants=monitor.alert.sms.service
+Wants=monitor.alert.mail.service
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/pingwee
+ExecStart=/opt/pingwee/pingwee.js
+User=monitor
+Group=monitor
+PIDFile=/run/monitor/monitor.pingwee.pid
+
+[Install]
+WantedBy=multi-user.target
+Alias=pingwee.service

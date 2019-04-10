@@ -1,0 +1,18 @@
+[Unit]
+Description=Monitor traceroute
+Documentation=http://www.test.fr
+After=network.target network-online.target
+Requires=redis-server.service
+Wants=monitor.networks.service
+
+[Service]
+Type=forking
+WorkingDirectory=/opt/probe.trace
+ExecStart=/opt/probe.trace/runner
+User=root
+Group=root
+PIDFile=/run/monitor/monitor.probe.trace.pid
+
+[Install]
+WantedBy=multi-user.target
+Alias=monitor.probe.trace.service

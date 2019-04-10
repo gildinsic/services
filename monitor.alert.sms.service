@@ -1,0 +1,17 @@
+[Unit]
+Description=Monitor sms
+Documentation=http://www.test.fr
+After=network.target network-online.target
+Requires=redis-server.service
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/alert.sms
+ExecStart=/opt/alert.sms/alert.sms.js
+User=monitor
+Group=monitor
+PIDFile=/run/monitor/monitor.alert.sms.pid
+
+[Install]
+WantedBy=multi-user.target
+Alias=alert.sms.service

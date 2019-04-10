@@ -1,0 +1,21 @@
+[Unit]
+Description=Monitor ping
+Documentation=http://www.test.fr
+After=network.target network-online.target
+Requires=redis-server.service
+Wants=monitor.networks.service
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/probe.ping
+ExecStart=/opt/probe.ping/probe.ping.js
+User=root
+Group=root
+PIDFile=/run/monitor/monitor.probe.ping.pid
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=monitor.probe.ping
+
+[Install]
+Alias=monitor.probe.ping.service
+WantedBy=multi-user.target

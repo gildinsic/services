@@ -1,0 +1,20 @@
+[Unit]
+Description=Monitor networks
+Documentation=http://www.test.fr
+After=network.target network-online.target
+Requires=redis-server.service
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/networks
+ExecStart=/opt/networks/networks.js
+User=monitor
+Group=monitor
+PIDFile=/run/monitor/monitor.networks.pid
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=monitor.networks
+
+[Install]
+WantedBy=multi-user.target
+Alias=monitor.networks.service
